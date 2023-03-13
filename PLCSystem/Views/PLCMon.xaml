@@ -1,0 +1,267 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PLCSystem.Views"
+             xmlns:hc="https://handyorg.github.io/handycontrol" x:Class="PLCSystem.Views.PLCMon"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <UserControl.Resources>
+        <ControlTemplate TargetType="{x:Type Button}" x:Key="FlipButtonTemplate">
+            <Grid Background="Transparent" x:Name="back">
+                <TextBlock Text="{Binding Content, RelativeSource={RelativeSource AncestorType={x:Type Button}, Mode=FindAncestor}}" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           FontSize="20" FontFamily="{StaticResource iconfont}"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#11000000" TargetName="back"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+
+
+
+
+    <Viewbox Stretch="Fill" x:Name="Maindis" >
+        <Grid x:Name="EquMon">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="360"/>
+                <RowDefinition Height="380"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16" />
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="230"/>
+                <!--<ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="230"/>-->
+                <ColumnDefinition Width="16" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="LeftSwitch"  Template="{StaticResource FlipButtonTemplate}"  Content="&#xE609;"  Background="Transparent" Grid.RowSpan="2" Margin="0,355,0,0" VerticalAlignment="Top" Command="{Binding Leftpage}" CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <Button x:Name="RightSwitch" Template="{StaticResource FlipButtonTemplate}"  Margin="0,355,0,0" Grid.RowSpan="2"  Grid.Column="10"   Content="&#xE608;" VerticalAlignment="Top"  Command="{Binding RighPage}" CommandParameter="{Binding .,RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            <!--<TabControl   Grid.Row="0" Grid.Column="1"  Style="{StaticResource TabControlInLine}" FontSize="10" Margin="1,2,1,2">
+                <TabItem   Background="#FFE5E5E5">
+                    <TabItem.Header>
+                        <Grid Width="221">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="34"/>
+                                <ColumnDefinition Width="137"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock    Text="1A机" FontSize="8" Width="38"   Style="{StaticResource TextBlockDefaultPrimary}"/>
+                            <TextBlock Grid.Column="1" FontSize="8"  Text="92号汽油92号汽油92号汽油" Style="{StaticResource TextBlockDefaultPrimary}" Width="137"/>
+                            <TextBlock  Grid.Column="2" FontSize="8"   Text="待机中"  Style="{StaticResource TextBlockDefaultPrimary}" Width="30"/>
+
+
+
+
+                        </Grid>
+                    </TabItem.Header>
+                    <Grid Background="#FFE5E5E5" Height="351"  >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27" />
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                            <RowDefinition Height="27"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center" >
+                            <TextBlock  Text="当前状态：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,0" VerticalAlignment="Center">
+                            <Label      Content="待机中"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="3" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center">
+                            <TextBlock  Text="报警状态" Style="{StaticResource TextBlockDefaultBold}" Margin="30,0" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center" >
+                            <TextBlock  Text="当前单号：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="220308001"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center">
+                            <TextBlock  Text="车牌号：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="鲁C123KL"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+                        <StackPanel x:Name="A" Grid.Row="1" Grid.Column="3" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button x:Name="tx" Padding="1,0,1,1" FontSize="10"  Content="通讯" Style="{StaticResource ButtonSuccess}" Width="40" Margin="1"  />
+                            <Button x:Name="jd" Padding="1,0,1,1" FontSize="10"  Content="静电" Style="{StaticResource ButtonSuccess}" Width="40" Margin="1" />
+                        </StackPanel>
+
+                        <StackPanel x:Name="B" Grid.Row="2" Grid.Column="3" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button x:Name="yy" FontSize="10" Content="溢油" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                            <Button x:Name="yC" FontSize="10" Content="钥匙" Style="{StaticResource ButtonDanger}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center" >
+                            <TextBlock  Text="预  装  量：" Style="{StaticResource TextBlockDefaultBold}" Margin="3,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="800Kg"  Style="{StaticResource LabelInfo}"  VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="3" Grid.Column="3" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="可燃" Style="{StaticResource ButtonSuccess}"  Width="40"  Margin="1"/>
+                            <Button FontSize="10" Content="液接" Style="{StaticResource ButtonSuccess}"  Width="40"  Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center"  >
+                            <TextBlock  Text="实  装  量：" Style="{StaticResource TextBlockDefaultBold}" Margin="3,0" VerticalAlignment="Center"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="800Kg"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+
+
+                        <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="气连" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                            <Button FontSize="10" Content="气流" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center" >
+                            <TextBlock  Text="瞬时流量：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="800.0T/h"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Row="5" Grid.Column="2" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="气溢" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                            <Button FontSize="10" Content="急停" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5,0" VerticalAlignment="Center" >
+                            <TextBlock  Text="累计流量：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="1000.0T"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Row="6" Grid.Column="2" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="关阀" Style="{StaticResource ButtonBaseBaseStyle}"  Width="40" Margin="1"/>
+                            <Button FontSize="10" Content="液归" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="7" Orientation="Horizontal" Margin="5,0"  VerticalAlignment="Center" >
+                            <TextBlock  Text=" 温      度：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="0.0℃"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+
+
+                        <StackPanel Grid.Row="7" Grid.Column="2" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="气归" Style="{StaticResource ButtonDashedInfo}"  Width="40" Margin="1"/>
+                            <Button FontSize="10" Content="零速" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="8" Orientation="Horizontal" Margin="5,0"  VerticalAlignment="Center" >
+                            <TextBlock  Text=" 密      度：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center"/>
+
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label Content="0g/cm³"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="温度" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                            <Button FontSize="10" Content="密度" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="9" Orientation="Horizontal" Margin="5,0"  VerticalAlignment="Center" >
+                            <TextBlock  Text=" 压      力：" Style="{StaticResource TextBlockDefaultBold}" Margin="5,0" VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="9" Grid.Column="1" Orientation="Horizontal"  VerticalAlignment="Center">
+                            <Label  Content="0.0Mpa"  Style="{StaticResource LabelInfo}" VerticalContentAlignment="Center" Width="72"/>
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Row="9" Grid.Column="2" Orientation="Horizontal" Margin="5,3" VerticalAlignment="Center" >
+                            <Button FontSize="10" Content="压力" Style="{StaticResource ButtonSuccess}"  Width="40" Margin="1"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="10" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="5,0"  VerticalAlignment="Center" >
+                            <ProgressBar  Value="50" Background="LightBlue" Style="{StaticResource ProgressBarSuccess}" Width="211" Height="14"/>
+                        </StackPanel>
+
+
+                        <StackPanel Grid.Row="11" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="70,0,70,0"  VerticalAlignment="Center" >
+                            <Button  FontSize="10"  Content="操作" Style="{StaticResource ButtonInfo}" Margin="1"    Width="50"/>
+                            <Button  FontSize="10"  Content="急停" Style="{StaticResource ButtonDanger}" Margin="1"  Width="50"/>
+                        </StackPanel>
+
+
+
+
+                    </Grid>
+                </TabItem>
+            </TabControl>-->
+
+
+
+
+
+
+
+        </Grid>
+    </Viewbox>
+</UserControl>
